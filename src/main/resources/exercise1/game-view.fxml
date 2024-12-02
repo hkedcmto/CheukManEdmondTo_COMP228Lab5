@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<GridPane fx:controller="exercise1.GameController"
+          xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="4" vgap="4">
+
+    <!-- 3 columns -->
+    <columnConstraints>
+        <ColumnConstraints percentWidth="10" />
+        <ColumnConstraints percentWidth="10" />
+        <ColumnConstraints percentWidth="80" />
+    </columnConstraints>
+
+    <!-- Add Game -->
+    <!-- Row 1 -->
+    <Label fx:id="addGameLbl" text="Add Game"
+           GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" style="-fx-font-size: 16px; -fx-font-weight: bold" />
+
+    <!-- Row 2 -->
+    <Label fx:id="addGameTitleLbl" text="Title: "
+           GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="addGameTitleTf" promptText="Enter Game Title"
+               GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <!-- Table of Game query result-->
+    <TableView fx:id="gameTable" layoutX="50" layoutY="50" prefWidth="600" prefHeight="100" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
+        <columns>
+            <TableColumn fx:id="gameIdColumn" text="ID" prefWidth="50" />
+            <TableColumn fx:id="gameTitleColumn" text="Title" prefWidth="400" />
+        </columns>
+    </TableView>
+
+    <!-- Row 3 -->
+    <Button fx:id="addGameSubmitBtn" text="Submit"
+            GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#onAddGameSubmitBtnClicked" />
+
+    <!-- Add Player -->
+    <!--Row 4 -->
+    <Label fx:id="addPlayerLbl" text="Add Player"
+           GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" style="-fx-font-size: 16px; -fx-font-weight: bold" />
+    <Label fx:id="addPlayerEditLbl" text="Double click the player to edit."
+           GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+    <!-- Row 5 -->
+    <Label fx:id="addPlayerFirstNameLbl" text="First name: "
+           GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <TextField fx:id="addPlayerFirstNameTf" promptText="Enter First name"
+               GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <TableView fx:id="playerTable" layoutX="50" layoutY="50" prefWidth="500" prefHeight="100" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="7">
+        <columns>
+            <TableColumn fx:id="playerIdColumn" text="ID" prefWidth="50" />
+            <TableColumn fx:id="playerFirstNameColumn" text="First name" prefWidth="100" />
+            <TableColumn fx:id="playerLastNameColumn" text="Last name" prefWidth="100" />
+            <TableColumn fx:id="playerAddressColumn" text="Address" prefWidth="200" />
+            <TableColumn fx:id="playerPostalCodeColumn" text="Postal Code" prefWidth="100" />
+            <TableColumn fx:id="playerProvinceColumn" text="Province" prefWidth="100" />
+            <TableColumn fx:id="playerPhoneNoColumn" text="Phone No." prefWidth="100" />
+        </columns>
+    </TableView>
+
+    <!--Row 6 -->
+    <Label fx:id="addPlayerLastNameLbl" text="Last name: "
+           GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <TextField fx:id="addPlayerLastNameTf" promptText="Enter Last name"
+               GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <!--Row 7 -->
+    <Label fx:id="addPlayerAddressLbl" text="Address: "
+           GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <TextField fx:id="addPlayerAddressTf" promptText="Enter Address"
+               GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    <!-- Row 8 -->
+    <Label fx:id="addPlayerPostalCodeLbl" text="Postal Code: "
+           GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+    <TextField fx:id="addPlayerPostalCodeTf" promptText="Enter Postal Code"
+               GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+    <!-- Row 9 -->
+    <Label fx:id="addPlayerProvinceLbl" text="Province: "
+           GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+    <TextField fx:id="addPlayerProvinceTf" promptText="Enter Province"
+               GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+
+    <!-- Row 10 -->
+    <Label fx:id="addPlayerPhoneNumberLbl" text="Phone No.: "
+           GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+    <TextField fx:id="addPlayerPhoneNumberTf" promptText="Enter Phone No."
+               GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+
+    <!-- Row 11 -->
+    <TextField fx:id="playerIdHidden" managed="false" />
+    <Button fx:id="addPlayerSubmitBtn" text="Add Player"
+            GridPane.columnIndex="1" GridPane.rowIndex="10" onAction="#onAddPlayerSubmitBtnClicked"/>
+    <!-- Edit Player and Cancel button are invisible in Add Player Mode -->
+    <Button fx:id="editPlayerSubmitBtn" text="Edit Player"
+            GridPane.columnIndex="1" GridPane.rowIndex="10" onAction="#onEditPlayerSubmitBtnClicked" visible="false" managed="false"/>
+    <Button fx:id="editPlayerCancelBtn" text="Cancel"
+            GridPane.columnIndex="0" GridPane.rowIndex="10" onAction="#onEditPlayerCancelBtnClicked" visible="false" managed="false"/>
+
+
+
+    <!-- Add Player and Game -->
+    <!-- Row 12 -->
+    <Label fx:id="addPaGLbl" text="Add Played Game Info"
+           GridPane.columnIndex="0" GridPane.rowIndex="11" GridPane.columnSpan="2" style="-fx-font-size: 16px; -fx-font-weight: bold" />
+
+    <!-- Row 13 -->
+    <Label fx:id="addPaGGameLbl" text="Game: "
+           GridPane.columnIndex="0" GridPane.rowIndex="12"/>
+    <ComboBox fx:id="addPaGGameCbx" maxWidth="Infinity" minHeight="30"
+            GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+    <TableView fx:id="pagTable" layoutX="50" layoutY="50" prefWidth="500" prefHeight="100"
+               GridPane.columnIndex="2" GridPane.rowIndex="12" GridPane.rowSpan="5">
+        <columns>
+            <TableColumn fx:id="pagIdColumn" text="ID" prefWidth="50" />
+            <TableColumn fx:id="pagGameIdColumn" text="Game ID" prefWidth="30" />
+            <TableColumn fx:id="pagGameTitleColumn" text="Game Title" prefWidth="100" />
+            <TableColumn fx:id="pagPlayerIdColumn" text="Player ID" prefWidth="30" />
+            <TableColumn fx:id="pagFullNameColumn" text="Full name" prefWidth="100" />
+            <TableColumn fx:id="pagPlayingDateColumn" text="Playing Date" prefWidth="200" />
+            <TableColumn fx:id="pagScoreColumn" text="Score" prefWidth="100" />
+        </columns>
+    </TableView>
+
+    <!-- Row 14 -->
+    <Label fx:id="addPaGPlayerLbl" text="Player: "
+           GridPane.columnIndex="0" GridPane.rowIndex="13"/>
+    <ComboBox fx:id="addPaGPlayerCbx" maxWidth="Infinity" minHeight="30"
+              GridPane.columnIndex="1" GridPane.rowIndex="13"/>
+
+    <!-- Row 15 -->
+    <Label fx:id="addPaGPlayingDateLbl" text="Playing Date: "
+           GridPane.columnIndex="0" GridPane.rowIndex="14"/>
+    <TextField fx:id="addPaGPlayingDateTf" promptText="MM-DD-YYYY"
+               GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+
+    <!-- Row 16 -->
+    <Label fx:id="addPaGScoreLbl" text="Score: "
+           GridPane.columnIndex="0" GridPane.rowIndex="15"/>
+    <TextField fx:id="addPaGScoreTf" promptText="Score"
+               GridPane.columnIndex="1" GridPane.rowIndex="15"/>
+
+    <!-- Row 17 -->
+    <Button fx:id="addPaGSubmitBtn" text="Add Played Game"
+            GridPane.columnIndex="1" GridPane.rowIndex="16" onAction="#onAddPaGSubmitBtnClicked"/>
+
+</GridPane>
