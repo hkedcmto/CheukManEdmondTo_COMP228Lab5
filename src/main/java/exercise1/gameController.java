@@ -72,10 +72,22 @@ public class GameController{
     @FXML private Button editPlayerCancelBtn;
 
     //Row 12
+    @FXML private Label filterPlayerLbl;
+    private ObservableList<Player> playerFilteredList;
+
+    //Row 13
+    @FXML private Label filterPlayerIdLbl;
+    @FXML private ComboBox<Player> filterPlayerCbx;
+
+    //Row 14
+    @FXML private Button filterPlayerCancelBtn;
+    @FXML private Button filterPlayerSubmitBtn;
+
+    //Row 15
     @FXML
     private Label addPaGLbl;
 
-    //Row 13
+    //Row 16
     @FXML private Label addPaGGameLbl;
     @FXML private ComboBox<Game> addPaGGameCbx;
     //Player And Game Table
@@ -87,23 +99,22 @@ public class GameController{
     @FXML private TableColumn<Player, String> pagFullNameColumn;
     @FXML private TableColumn<Player, String> pagPlayingDateColumn;
     @FXML private TableColumn<Player, Integer> pagScoreColumn;
-
     private ObservableList<PaG> pagList;
 
 
-    //Row 14
+    //Row 17
     @FXML private Label addPaGPlayerLbl;
     @FXML private ComboBox<Player> addPaGPlayerCbx;
 
-    //Row 15
+    //Row 18
     @FXML private Label addPaGPlayingDateLbl;
     @FXML private TextField addPaGPlayingDateTf;
 
-    //Row 16
+    //Row 19
     @FXML private Label addPaGScoreLbl;
     @FXML private TextField addPaGScoreTf;
 
-    //Row 17
+    //Row 20
     @FXML private Button addPaGSubmitBtn;
 
     //Initializer
@@ -159,6 +170,20 @@ public class GameController{
                 return null;
             }
         });
+        filterPlayerCbx.setItems(playerList); //add to filter player combobox
+        filterPlayerCbx.setConverter(new javafx.util.StringConverter<Player>() { //display string in combobox
+            @Override
+            public String toString(Player player) {
+                // Display the Player ID as a string in the ComboBox
+                return player == null ? "" : String.valueOf(player.getPlayerId());
+            }
+
+            @Override
+            public Player fromString(String string) {
+                return null;
+            }
+        });
+
 
         //handle double-click the row in player table to edit mode
         playerTable.setRowFactory(tv -> {
@@ -403,5 +428,39 @@ public class GameController{
     //Cancel edit mode and return to add player mode
     public void onEditPlayerCancelBtnClicked(ActionEvent actionEvent) {
         addPlayerMode();
+    }
+
+    //Filter player by id
+    public void onFilterPlayerSubmitBtnClicked(ActionEvent actionEvent) throws Exception {
+        try {
+            if (filterPlayerCbx.getValue() == null) { //Fill in all fields validation
+                throw new Exception("Please select player ID.");
+            }
+
+            //Convert Player to Player ID
+            Player selectedPlayer = filterPlayerCbx.getValue();//put the selected combobox obj to player obj
+            int playerId = selectedPlayer.getPlayerId();
+
+            playerIdColumn.setCellValueFactory(new PropertyValueFactory<>("playerId"));
+            playerFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            playerLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            playerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+            playerPostalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+            playerProvinceColumn.setCellValueFactory(new PropertyValueFactory<>("province"));
+            playerPhoneNoColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+            //query DB
+            Db filterPlayerDb = new Db();
+            playerFilteredList = FXCollections.observableArrayList(
+                    filterPlayerDb.readPlayerById(selectedPlayer.getPlayerId())
+            );
+            playerTable.setItems(playerFilteredList); //add to Player Table
+
+        } catch (Exception e) {
+            showMessage(1, e.getMessage());
+        }
+    }
+
+    public void onFilterPlayerCancelBtnClicked(ActionEvent actionEvent) throws Exception {
+        initialize();
     }
 }

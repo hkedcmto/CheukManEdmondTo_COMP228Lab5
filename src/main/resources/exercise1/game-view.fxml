@@ -54,7 +54,7 @@
     <TextField fx:id="addPlayerFirstNameTf" promptText="Enter First name"
                GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-    <TableView fx:id="playerTable" layoutX="50" layoutY="50" prefWidth="500" prefHeight="100" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="7">
+    <TableView fx:id="playerTable" layoutX="50" layoutY="50" prefWidth="500" prefHeight="100" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="10">
         <columns>
             <TableColumn fx:id="playerIdColumn" text="ID" prefWidth="50" />
             <TableColumn fx:id="playerFirstNameColumn" text="First name" prefWidth="100" />
@@ -106,20 +106,36 @@
     <Button fx:id="editPlayerCancelBtn" text="Cancel"
             GridPane.columnIndex="0" GridPane.rowIndex="10" onAction="#onEditPlayerCancelBtnClicked" visible="false" managed="false"/>
 
-
-
-    <!-- Add Player and Game -->
+    <!-- Filter player -->
     <!-- Row 12 -->
-    <Label fx:id="addPaGLbl" text="Add Played Game Info"
+    <Label fx:id="filterPlayerLbl" text="Filter Player by ID"
            GridPane.columnIndex="0" GridPane.rowIndex="11" GridPane.columnSpan="2" style="-fx-font-size: 16px; -fx-font-weight: bold" />
 
     <!-- Row 13 -->
-    <Label fx:id="addPaGGameLbl" text="Game: "
+    <Label fx:id="filterPlayerIdLbl" text="Player ID: "
            GridPane.columnIndex="0" GridPane.rowIndex="12"/>
+    <ComboBox fx:id="filterPlayerCbx" maxWidth="Infinity" minHeight="30"
+              GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+
+    <!-- Row 14 -->
+    <Button fx:id="filterPlayerCancelBtn" text="Remove Filter"
+            GridPane.columnIndex="0" GridPane.rowIndex="13" onAction="#onFilterPlayerCancelBtnClicked"/>
+    <Button fx:id="filterPlayerSubmitBtn" text="Filter Player"
+            GridPane.columnIndex="1" GridPane.rowIndex="13" onAction="#onFilterPlayerSubmitBtnClicked"/>
+
+
+    <!-- Add Player and Game -->
+    <!-- Row 15 -->
+    <Label fx:id="addPaGLbl" text="Add Played Game Info"
+           GridPane.columnIndex="0" GridPane.rowIndex="14" GridPane.columnSpan="2" style="-fx-font-size: 16px; -fx-font-weight: bold" />
+
+    <!-- Row 16 -->
+    <Label fx:id="addPaGGameLbl" text="Game: "
+           GridPane.columnIndex="0" GridPane.rowIndex="15"/>
     <ComboBox fx:id="addPaGGameCbx" maxWidth="Infinity" minHeight="30"
-            GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="15"/>
     <TableView fx:id="pagTable" layoutX="50" layoutY="50" prefWidth="500" prefHeight="100"
-               GridPane.columnIndex="2" GridPane.rowIndex="12" GridPane.rowSpan="5">
+               GridPane.columnIndex="2" GridPane.rowIndex="15" GridPane.rowSpan="5">
         <columns>
             <TableColumn fx:id="pagIdColumn" text="ID" prefWidth="50" />
             <TableColumn fx:id="pagGameIdColumn" text="Game ID" prefWidth="30" />
@@ -131,26 +147,26 @@
         </columns>
     </TableView>
 
-    <!-- Row 14 -->
-    <Label fx:id="addPaGPlayerLbl" text="Player: "
-           GridPane.columnIndex="0" GridPane.rowIndex="13"/>
-    <ComboBox fx:id="addPaGPlayerCbx" maxWidth="Infinity" minHeight="30"
-              GridPane.columnIndex="1" GridPane.rowIndex="13"/>
-
-    <!-- Row 15 -->
-    <Label fx:id="addPaGPlayingDateLbl" text="Playing Date: "
-           GridPane.columnIndex="0" GridPane.rowIndex="14"/>
-    <TextField fx:id="addPaGPlayingDateTf" promptText="MM-DD-YYYY"
-               GridPane.columnIndex="1" GridPane.rowIndex="14"/>
-
-    <!-- Row 16 -->
-    <Label fx:id="addPaGScoreLbl" text="Score: "
-           GridPane.columnIndex="0" GridPane.rowIndex="15"/>
-    <TextField fx:id="addPaGScoreTf" promptText="Score"
-               GridPane.columnIndex="1" GridPane.rowIndex="15"/>
-
     <!-- Row 17 -->
+    <Label fx:id="addPaGPlayerLbl" text="Player: "
+           GridPane.columnIndex="0" GridPane.rowIndex="16"/>
+    <ComboBox fx:id="addPaGPlayerCbx" maxWidth="Infinity" minHeight="30"
+              GridPane.columnIndex="1" GridPane.rowIndex="16"/>
+
+    <!-- Row 18 -->
+    <Label fx:id="addPaGPlayingDateLbl" text="Playing Date: "
+           GridPane.columnIndex="0" GridPane.rowIndex="17"/>
+    <TextField fx:id="addPaGPlayingDateTf" promptText="MM-DD-YYYY"
+               GridPane.columnIndex="1" GridPane.rowIndex="17"/>
+
+    <!-- Row 19 -->
+    <Label fx:id="addPaGScoreLbl" text="Score: "
+           GridPane.columnIndex="0" GridPane.rowIndex="18"/>
+    <TextField fx:id="addPaGScoreTf" promptText="Score"
+               GridPane.columnIndex="1" GridPane.rowIndex="18"/>
+
+    <!-- Row 20 -->
     <Button fx:id="addPaGSubmitBtn" text="Add Played Game"
-            GridPane.columnIndex="1" GridPane.rowIndex="16" onAction="#onAddPaGSubmitBtnClicked"/>
+            GridPane.columnIndex="1" GridPane.rowIndex="19" onAction="#onAddPaGSubmitBtnClicked"/>
 
 </GridPane>

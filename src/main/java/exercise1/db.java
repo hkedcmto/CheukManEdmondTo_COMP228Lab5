@@ -65,6 +65,37 @@ public class Db implements Config {
         return players;
     }
 
+    //Query for the Player table filtered by ID and return the List<Player> for the TableView to list out
+    public List<Player> readPlayerById(int playerId) {
+        List<Player> players = new ArrayList<>();
+        String query = "SELECT * FROM \"" + playerTable + "\" WHERE player_id = ?";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, playerId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                // Process each row
+                while (rs.next()) {
+                    Player player = new Player();
+                    player.setPlayerId(rs.getInt("player_id"));
+                    player.setPlayerFirstName(rs.getString("first_name"));
+                    player.setPlayerLastName(rs.getString("last_name"));
+                    player.setPlayerAddress(rs.getString("address"));
+                    player.setPlayerPostalCode(rs.getString("postal_code"));
+                    player.setPlayerProvince(rs.getString("province"));
+                    player.setPlayerPhoneNumber(rs.getString("phone_number")); // Use getString for phone number
+                    players.add(player);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error reading data: " + e.getMessage());
+        }
+        return players;
+    }
+
+
     //Query for the Player table and return the List<Player> for the TableView to list out
     public List<PaG> readPaG() {
         List<PaG> pags = new ArrayList<>();
@@ -182,4 +213,5 @@ public class Db implements Config {
 
         return rowsAffected;
     }
+
 }
